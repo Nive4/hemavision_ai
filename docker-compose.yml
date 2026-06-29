@@ -1,0 +1,24 @@
+version: '3.8'
+
+services:
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+    environment:
+      - FRONTEND_URL=http://localhost
+    volumes:
+      # Mount the database to persist data across container restarts
+      - ./hemavision.db:/app/backend/hemavision.db
+      - ./backend/data/uploads:/app/backend/data/uploads
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    ports:
+      - "80:80"
+    depends_on:
+      - backend
