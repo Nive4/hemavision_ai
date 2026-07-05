@@ -1,0 +1,43 @@
+services:
+  # Backend - FastAPI Python Web Service
+  - type: web
+    name: hemavision-api
+    runtime: python
+    region: oregon
+    plan: free
+    buildCommand: |
+      cd backend && pip install -r requirements.txt
+    startCommand: |
+      cd backend && uvicorn app.main:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: PYTHONPATH
+        value: /opt/render/project/src/backend/..
+      - key: PROJECT_NAME
+        value: HemaVision AI
+      - key: SECRET_KEY
+        generateValue: true
+      - key: DATABASE_URL
+        value: sqlite:///./hemavision.db
+      - key: HF_LLM_MODEL
+        value: Qwen/Qwen2.5-1.5B-Instruct
+      - key: FRONTEND_URL
+        value: "*"
+      - key: PYTHON_VERSION
+        value: "3.10.12"
+
+  # Frontend - React Static Site
+  - type: web
+    name: hemavision-ui
+    runtime: static
+    region: oregon
+    plan: free
+    buildCommand: cd frontend && npm install && npm run build
+    staticPublishPath: frontend/dist
+    headers:
+      - path: /*
+        name: Cache-Control
+        value: no-cache
+    routes:
+      - type: rewrite
+        source: /*
+        destination: /index.html

@@ -1,5 +1,5 @@
 # Stage 1: Build the React application
-FROM node:18-alpine as build
+FROM node:22-alpine as build
 WORKDIR /app
 
 # Install dependencies
@@ -8,9 +8,10 @@ RUN npm install
 
 # Copy source and build
 COPY . .
-# Set the API URL for the production build
-# When deployed locally via Docker Compose, the backend will be available at localhost:8000
-ENV VITE_API_URL=http://localhost:8000
+# Set the API URL for the production build using an argument
+# Default to localhost if no argument is provided
+ARG VITE_API_URL=http://localhost:8000
+ENV VITE_API_URL=$VITE_API_URL
 RUN npm run build
 
 # Stage 2: Serve the application with Nginx

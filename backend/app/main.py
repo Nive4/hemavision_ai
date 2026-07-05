@@ -34,10 +34,14 @@ origins = [
 if settings.FRONTEND_URL and settings.FRONTEND_URL != "*":
     origins.append(settings.FRONTEND_URL)
 
+# In production with FRONTEND_URL="*", allow_credentials must be False
+# when allow_origins is ["*"] (CORS spec requirement)
+is_wildcard = settings.FRONTEND_URL == "*"
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"] if settings.FRONTEND_URL == "*" else origins,
-    allow_credentials=True,
+    allow_origins=["*"] if is_wildcard else origins,
+    allow_credentials=not is_wildcard,
     allow_methods=["*"],
     allow_headers=["*"],
 )
