@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { BASE_URL } from '../../services/api';
 import Card from '../common/Card';
 
 const GradCAMViewer = ({ explanation = {} }) => {
@@ -46,7 +47,7 @@ const GradCAMViewer = ({ explanation = {} }) => {
         <div className="flex flex-col items-center">
           <div className="relative w-full max-w-sm rounded-xl overflow-hidden border border-slate-800 shadow-lg">
             <img 
-              src={`${import.meta.env.VITE_API_URL || 'http://localhost:8000'}${activeMod.url}`} 
+              src={`${BASE_URL}${activeMod.url}`} 
               alt={`Grad-CAM ${activeMod.label}`} 
               className="w-full h-auto object-contain"
             />

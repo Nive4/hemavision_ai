@@ -1,5 +1,5 @@
 import { useState } from "react";
-import api from "../services/api";
+import api, { BASE_URL } from "../services/api";
 import { 
   ScanHeart, 
   Upload, 
@@ -162,7 +162,7 @@ export default function ScreeningPage() {
   // Convert relative url from backend (e.g. /uploads/...) to absolute url
   const getImageUrl = (path) => {
     if (!path) return "";
-    const baseUrl = import.meta.env.VITE_API_URL || 'http://localhost:8000';
+    const baseUrl = BASE_URL;
     return `${baseUrl}${path}`;
   };
 

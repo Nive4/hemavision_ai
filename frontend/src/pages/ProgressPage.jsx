@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import api from "../services/api";
+import api, { BASE_URL } from "../services/api";
 import { 
   TrendingUp, 
   Calendar, 
@@ -330,7 +330,7 @@ export default function ProgressPage() {
                     <div className="bg-white/5 p-2 rounded-xl border border-white/5 flex gap-3 items-center">
                       <div className="w-12 h-12 rounded-lg overflow-hidden shrink-0">
                         <img 
-                          src={`${import.meta.env.VITE_API_URL || 'http://localhost:8000'}${activeScreening.explanation.gradcam_eye}`} 
+                          src={`${BASE_URL}${activeScreening.explanation.gradcam_eye}`} 
                           alt="Eye Gradcam" 
                           className="w-full h-full object-cover"
                         />
@@ -346,7 +346,7 @@ export default function ProgressPage() {
                     <div className="bg-white/5 p-2 rounded-xl border border-white/5 flex gap-3 items-center">
                       <div className="w-12 h-12 rounded-lg overflow-hidden shrink-0">
                         <img 
-                          src={`${import.meta.env.VITE_API_URL || 'http://localhost:8000'}${activeScreening.explanation.gradcam_nail}`} 
+                          src={`${BASE_URL}${activeScreening.explanation.gradcam_nail}`} 
                           alt="Nail Gradcam" 
                           className="w-full h-full object-cover"
                         />
@@ -362,7 +362,7 @@ export default function ProgressPage() {
                     <div className="bg-white/5 p-2 rounded-xl border border-white/5 flex gap-3 items-center">
                       <div className="w-12 h-12 rounded-lg overflow-hidden shrink-0">
                         <img 
-                          src={`${import.meta.env.VITE_API_URL || 'http://localhost:8000'}${activeScreening.explanation.gradcam_tongue}`} 
+                          src={`${BASE_URL}${activeScreening.explanation.gradcam_tongue}`} 
                           alt="Tongue Gradcam" 
                           className="w-full h-full object-cover"
                         />

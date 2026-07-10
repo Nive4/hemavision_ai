@@ -1,6 +1,8 @@
 import axios from "axios";
 
-export const BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:8000";
+// In production (HF Spaces), frontend & backend share the same origin → use relative URLs
+// In development, fall back to localhost:8000 where the backend runs
+export const BASE_URL = import.meta.env.VITE_API_URL || (import.meta.env.PROD ? "" : "http://localhost:8000");
 const API_URL = `${BASE_URL}/api/v1`;
 
 const api = axios.create({

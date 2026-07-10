@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { BASE_URL } from '../services/api';
 import Card from '../components/common/Card';
 import Button from '../components/common/Button';
 import LoadingSpinner from '../components/common/LoadingSpinner';
@@ -18,7 +19,7 @@ const ResultsPage = () => {
     const fetchLatestResult = async () => {
       try {
         const token = localStorage.getItem('token');
-        const baseUrl = import.meta.env.VITE_API_URL || 'http://localhost:8000';
+        const baseUrl = BASE_URL;
         const response = await axios.get(`${baseUrl}/api/v1/screening/latest`, {
           headers: { Authorization: `Bearer ${token}` }
         });
